@@ -10,6 +10,12 @@ export default({item}) => {
         genres.push(item.genres[i].name);
     }
 
+    let description = item.overview;
+    if(description.length > 200){
+        description = description.substring(0, 200) +'...';
+    }
+
+
     //pontos precisando arredondar (8.987) -> (8.9)
     let fixPoints = item.vote_average;
     let pontos = fixPoints.toFixed(1);
@@ -28,7 +34,7 @@ export default({item}) => {
                         <div className="featured--year">{firstDate.getFullYear()}</div>
                         <div className="featured--seasons"> {item.number_of_seasons } temporada{item.number_of_seasons !== 1 ? 's':''}</div>
                     </div>
-                    <div className="featured--description">{item.overview}</div>
+                    <div className="featured--description">{description}</div>
                     <div className="featured--buttons">
                         <a href={`/watch/${item.id}`} className="watchbutton">▶ Assistir</a>
                         <a href={`/list/add${item.id}`}className="mylistbutton"> + Minha Lista</a>    
